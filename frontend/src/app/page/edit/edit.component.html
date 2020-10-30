@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 box mt-5">
+            <div class="container-fluid">
+                <form [formGroup]="form" *ngIf="form">
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" class="form-control" formControlName="projectName">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="assignedTo">Assigned To</label>
+                                <select id="assignedTo" class="form-control" formControlName="assignedTo">
+                                    <ng-container *ngFor="let item of (assignees | async)?.items">
+                                        <option [value]="item.assigneeName">{{item.assigneeName}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-start">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select id="status" class="form-control" formControlName="statusName">
+                                    <ng-container *ngFor="let item of (statuses | async)?.items">
+                                        <option [value]="item.statusName">{{item.statusName}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="startDate">Start Date</label>
+                                <input type="date" class="form-control" id="startDate" formControlName="startDate">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="startDate">End Date</label>
+                                <input type="date" class="form-control" id="endDate" formControlName="endDate">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="notes">Notes</label>
+                                <textarea id="notes" class="form-control" formControlName="notes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center pb-4">
+                        <input type="submit" class="btn btn-primary" value="Submit" (click)="submit()">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

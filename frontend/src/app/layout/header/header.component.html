@@ -1,0 +1,31 @@
+<div class="container-fluid bg-black">
+  <div class="row p-0 align-items-center">
+    <div class="col-4">
+
+    </div>
+    <div class="col-4">
+      <div class="text-center">
+        <h1 class="appTitle">Capstone PM App</h1>
+      </div>
+    </div>
+    <div class="col-4 navigation text-right">
+      <span>| </span>
+      <a class="pl-3 pr-3" routerLink="/home">HOME</a>
+      <ng-container *ngIf="auth.user$ | async as user">
+        <span> | </span>
+        <a class="pl-3 pr-3" routerLink="/new">NEW</a>
+      </ng-container>
+
+      <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+        <span> | </span>
+        <a class="pl-3 pr-3 cursor" (click)="auth.logout({ returnTo: document.location.origin })">LOGOUT</a>
+      </ng-container>
+
+      <ng-template #loggedOut>
+        <span> | </span>
+        <a class="pl-3 pr-3 cursor" (click)="auth.loginWithRedirect()">LOGIN</a>
+      </ng-template>
+      <span> | </span>
+    </div>
+  </div>
+</div>

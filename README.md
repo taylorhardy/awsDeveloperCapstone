@@ -1,27 +1,31 @@
-# Capstone
+# Capstone Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+This is the final project for the AWS Developer nanodegree. This project is built using Angular for the front in and a Serverless infrastructure for the backend.
 
-## Development server
+## Functionality of the Application
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This is a project management application. After authenticating, users will be able to view projects that have been created and see the details on the home page. Users are able to create new project, as well as edit existing ones. 
 
-## Code scaffolding
+## Database Structure
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Three DynamoDB tables are used in this project
 
-## Build
+Project - this is where the details of the projects are stored
+Status - This is where the contents of the status drop downs are populated from
+Assignee - This is where the contents of the Assigned To drop downs are populated from
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Running the Front End Application
 
-## Running unit tests
+Use the Angular CLI in order to start the application locally, but running: ng serve
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Logging
 
-## Running end-to-end tests
+Logging is implemented using winston and XRay
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## HTTP Request Validation
 
-## Further help
+Request validation is enabled using a schema for HTTP request calls via API gateway
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Permissions
+
+IAM permissions are set at the function level. 
