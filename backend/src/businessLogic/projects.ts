@@ -27,14 +27,18 @@ export async function createProject(user, item: ProjectItem): Promise<ProjectIte
     return newRecord as ProjectItem;
 };
 
-export async function getProjects(): Promise<ProjectItem[]> {
+export async function getProjects(user): Promise<ProjectItem[]> {
     const projects = await docClient.scan({
         TableName: process.env.PROJECT_TABLE,
+        FilterExpression: 'createdBy = :createdBy',
+        ExpressionAttributeValues: {
+            ':createdBy': user
+        },
     }).promise();
     return projects.Items as ProjectItem[];
 };
 
-export async function getProject(projectId: string): Promise<ProjectItem> {
+export async function getProject(projectId: string, user: string): Promise<ProjectItem> {
     const projects = await docClient.query({
         TableName: process.env.PROJECT_TABLE,
         KeyConditionExpression: 'projectId = :projectId',
@@ -51,7 +55,7 @@ export async function updateProject(projectId: string, updatedProject) {
         Key: {
             projectId: projectId
         },
-        UpdateExpression: "set projectName = :projectName, assignedTo = :assignedTo,  statusName = :statusName, startDate = :startDate, endDate = :endDate, notes = :notes ",
+        UpdateExpression: "set projectName = :projectName, assignedTo = :assignedTo,  statusName = :statusName, startDate = :startDate, endDate = :endDate, notes = :notes, imageUrl = :imageUrl ",
         ExpressionAttributeValues: {
             ":projectName": updatedProject.projectName,
             ":assignedTo": updatedProject.assignedTo,
@@ -59,6 +63,16 @@ export async function updateProject(projectId: string, updatedProject) {
             ":startDate": updatedProject.startDate,
             ":endDate": updatedProject.endDate,
             ":notes": updatedProject.notes,
+            ":imageUrl": updatedProject.imageUrl
         }
     }).promise();
+};
+
+export async function deleteProject(user, projectId) {
+    await docClient.delete({
+        TableName: process.env.PROJECT_TABLE,
+        Key: {
+            projectId: projectId
+        }
+    }).promise()
 };

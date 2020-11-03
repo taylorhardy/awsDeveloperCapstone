@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ErrorService } from '../error/error.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -31,6 +31,12 @@ export class DataService {
 		);
 	};
 
+	public deleteRecord(id: string): Observable<any> {
+		return this.http.delete(`${this.apiUrl}/project/${id}`).pipe(
+			catchError(this.errorService.httpHandleError)
+		);
+	};
+
 	public getRecordByID(id: number): Observable<any> {
 		return this.http.get(`${this.apiUrl}/project/${id}`).pipe(
 			catchError(this.errorService.httpHandleError)
@@ -45,6 +51,18 @@ export class DataService {
 
 	public getAssignees(): Observable<any> {
 		return this.http.get(`${this.apiUrl}/assignee`).pipe(
+			catchError(this.errorService.httpHandleError)
+		);
+	};
+
+	public getUploadURL(id: string, fileType: string): Observable<any> {
+		return this.http.post(`${this.apiUrl}/project/${id}/attachment`, {fileType: fileType}).pipe(
+			catchError(this.errorService.httpHandleError)
+		);
+	};
+
+	public uploadImage(url: string, file): Observable<any> {
+		return this.http.put(`${url}`, file).pipe(
 			catchError(this.errorService.httpHandleError)
 		);
 	};

@@ -10,7 +10,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     const user = getUserId(event)
     const projectId = event.pathParameters.projectId;
 
-    const project = await getProject(projectId);
+    const project = await getProject(projectId, user);
     logger.info(`Retrieved Projects`)
     return {
         statusCode: 200,

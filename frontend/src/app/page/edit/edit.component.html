@@ -51,6 +51,19 @@
                         </div>
                     </div>
 
+                    <div class="row justify-content-start">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="attachment">Attachment</label>
+                                <input type="file" class="form-control" (change)="uploadFileChange($event)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-start">
+                        <img [src]="form.controls.imageUrl.value" alt="attachments" class="attachment" *ngIf="form.controls.imageUrl.value">
+                    </div>
+
                     <div class="row justify-content-center">
                         <div class="col-12">
                             <div class="form-group">

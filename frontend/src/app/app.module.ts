@@ -37,9 +37,11 @@ import { AuthHttpInterceptor } from '@auth0/auth0-angular';
             // The AuthHttpInterceptor configuration
             httpInterceptor: {
                 allowedList: [
-                  "*"
+                    {
+                        uri: 'https://t4pj9pn0p3.execute-api.us-east-2.amazonaws.com/dev/*',
+                    },
                 ]
-              }
+            }
         }),
     ],
     declarations: [

@@ -5,5 +5,6 @@ export interface UpdateProjectRequest {
     startDate: string
     endDate: string
     notes: string
+    imageUrl: string
   }
   

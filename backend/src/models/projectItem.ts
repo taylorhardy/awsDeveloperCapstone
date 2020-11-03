@@ -7,5 +7,6 @@ export interface ProjectItem {
     endDate: string
     notes: string
     createdBy: string
+    imageUrl: string
   }
   

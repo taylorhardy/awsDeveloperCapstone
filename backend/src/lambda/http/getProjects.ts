@@ -9,7 +9,7 @@ const logger = createLogger('getProjects');
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const user = getUserId(event)
 
-    const items = await getProjects();
+    const items = await getProjects(user);
     logger.info(`Retrieved Projects`)
     return {
         statusCode: 200,
